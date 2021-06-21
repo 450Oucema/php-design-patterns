@@ -1,6 +1,6 @@
 <?php
-return array(
-    'default' => array(
+return [
+    'default' => [
         'driver'    => 'mysql',
         'host'      => 'localhost',
         'port'      => 3306,
@@ -9,5 +9,5 @@ return array(
         'database'  => 'test-2',
         'charset'   => 'utf8mb4',
         'collation' => 'utf8mb4_unicode_ci',
-    ),
-);
+    ]
+];
