@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <title>Store</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-danger px-5">
+    <a class="navbar-brand" href="#">Store</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="/">Home</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="/">Cart ({{ cart.count }})</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container py-5">
+    <div class="row">
+        <h5>Cart ({{ cart.count }} item(s))</h5>
+        <hr>
+        <form action="/cart/order" method="POST" id="form_cart">
+            <table class="table table-borderless">
+                <tbody>
+                {% for item in cart.cartItems %}
+                    <tr>
+                        <td>
+                            <img src="{{ item.product.imageUrl }}" style="max-width: 100px">
+                        </td>
+                        <td>
+                            {{ item.product.name }}
+                        </td>
+                        <td>
+                            <input class="form-control cart-item-number" name="cart[{{ item.product.id }}]" style="max-width: 5rem; text-align: center" type="number" value="{{ item.count }}" max="{{ item.product.stock }}">
+                        </td>
+                        <td>
+                            <h5>${{ item.product.price }}</h5>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <div class="form-group">
+                <input type="text" class="form-control" name="username" placeholder="Please enter your username" required>
+            </div>
+        </form>
+    </div>
+    <div class="row">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>TOTAL</th>
+                <th>Price</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td class="total_count">{{ cart.count }}</td>
+                <td class="total_price">{{ cart.price }}</td>
+                <td>
+                    <button type="submit" form="form_cart" class="btn btn-lg btn-success w-100">Order</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

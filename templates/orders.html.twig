@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <title>Store</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-danger px-5">
+    <a class="navbar-brand" href="#">Store</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="/">Home</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="/cart">Cart ({{ cart.count }})</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container py-5">
+    <div class="row">
+        {% for order in orders %}
+            <div class="card" >
+                <h5 class="card-header">{{ order.id }}</h5>
+                <div class="card-body">
+                    <a href="/orders/{{ order.id }}" class="btn btn-primary w-25">See</a>
+                </div>
+            </div>
+        {% endfor %}
+
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,26 @@
+{
+    "name": "oucema/design-patterns-project",
+    "authors": [
+        {
+            "name": "Oucema JLAIEL",
+            "email": "oucema@movida-mail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\": "src"
+        }
+    },
+    "require": {
+        "twig/twig": "^3.0",
+        "riverside/php-orm": "^1.0",
+        "slim/slim": "^4.8",
+        "slim/psr7": "^1.4",
+        "ramsey/uuid": "^4.1",
+        "swiftmailer/swiftmailer": "^6.0"
+    },
+    "require-dev": {
+        "symfony/var-dumper": "^5.3",
+        "fzaninotto/faker": "^1.9"
+    }
+}

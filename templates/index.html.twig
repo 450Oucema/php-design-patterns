@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <title>Store</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-danger px-5">
+    <a class="navbar-brand" href="#">Store</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="/">Home</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="/cart">Cart ({{ cart.count }})</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container py-5">
+    <div class="row">
+        {% for product in products %}
+            <div class="col-md-6">
+                <div class="card">
+                    <img class="card-img-top" src="{{ product.imageUrl }}" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title"><p class="text-muted">#{{ product.id }} </p>{{ product.name }}</h5>
+                        <p class="card-text">{{ product.description }}</p>
+                        {% if productRemains(product) == false %}
+                            <span class="badge bg-danger">Out of stock</span>
+                            <span style="text-decoration: none; cursor: pointer" class="badge bg-info notify-me">Notify me ! ✨</span>
+                            {% else %}
+                            <a href="/add-to-cart/{{ product.id }}" class="btn btn-dark">Add to cart (${{ product.price }})</a>
+                        {% endif %}
+                    </div>
+                    <div class="card-footer d-none">
+                        <form action="/notify-me/{{ product.id }}" method="POST">
+                            <div class="row">
+                                <div class="col-auto">
+                                    <input type="email" placeholder="Please fill your email" required class="form-control" name="email">
+                                </div>
+                                <div class="col-auto">
+                                    <button class="btn btn-info text-white">Yeah !</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll(".notify-me").forEach((element) => {
+            element.addEventListener('click', () => {
+                const grandParent = element.parentElement.parentElement;
+                grandParent.querySelector('.card-footer').classList.toggle('d-none');
+            })
+        })
+    })
+</script>
+</body>
+</html>
